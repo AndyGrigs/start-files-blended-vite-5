@@ -5,12 +5,12 @@ import Loader from './components/Loader/Loader';
 import { lazy } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchBaseCurrency } from './redux/operations';
+import { setBaseCurrency } from './redux/currencySlice';
 
 const Home = lazy(() => import('./pages/Home'));
 const Rates = lazy(() => import('./pages/Rates'));
 
 export const App = () => {
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -21,11 +21,11 @@ export const App = () => {
     };
 
     function success(pos) {
-      dispatch(fetchBaseCurrency(pos.coords))
+      dispatch(fetchBaseCurrency(pos.coords));
     }
 
     function error(err) {
-      console.warn(`ERROR(${err.code}): ${err.message}`);
+      dispatch(setBaseCurrency('USD'));
     }
 
     navigator.geolocation.getCurrentPosition(success, error, options);
