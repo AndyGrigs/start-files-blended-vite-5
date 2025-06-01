@@ -24,7 +24,7 @@ export const App = () => {
       dispatch(fetchBaseCurrency(pos.coords));
     }
 
-    function error(err) {
+    function error() {
       dispatch(setBaseCurrency('USD'));
     }
 
